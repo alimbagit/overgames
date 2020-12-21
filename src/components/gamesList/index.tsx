@@ -3,9 +3,9 @@ import * as E from './elements';
 
 const GamesList=()=>{
     return(
-        <E.WrapperGamesList>
+        <E.GamesListWrapper>
             Список игр
-        </E.WrapperGamesList>
+        </E.GamesListWrapper>
     )
 }
 

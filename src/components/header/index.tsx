@@ -3,9 +3,9 @@ import * as E from './elements';
 
 const Header=()=>{
     return(
-        <E.WrapperHeader>
+        <E.HeaderWrapper>
             Заголовок
-        </E.WrapperHeader>
+        </E.HeaderWrapper>
     )
 }
 

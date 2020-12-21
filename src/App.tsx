@@ -1,14 +1,14 @@
 import React from "react";
 import TableViewer from "components/header";
-import { WrapperApp } from "./elements";
+import { AppWrapper } from "./elements";
 import Footer from "components/gamesList";
 
 const App = () => {
   return (
-    <WrapperApp>
+    <AppWrapper>
       <TableViewer />
       <Footer />
-    </WrapperApp>
+    </AppWrapper>
   );
 };
 

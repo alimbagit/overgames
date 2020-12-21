@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
-export const WrapperGamesList=styled.div`
-    
+export const GamesListWrapper = styled.div`
+    position:relative;
+    top: 40px;
 `;
