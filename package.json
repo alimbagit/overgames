@@ -22,13 +22,13 @@
     "styled-components": "5.2.0"
   },
   "devDependencies": {
-    "typescript": "^4.0.3",
-    "@types/redux": "^3.6.0",
     "@types/jest": "^24.0.0",
     "@types/node": "^12.12.2",
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
-    "redux-devtools-extension": "2.13.8"
+    "@types/redux": "^3.6.0",
+    "redux-devtools-extension": "2.13.8",
+    "typescript": "^4.0.3"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -38,7 +38,7 @@
   "browserslist": {
     "production": [
       ">0.2%",
-      "not dead",                           
+      "not dead",
       "not op_mini all"
     ],
     "development": [

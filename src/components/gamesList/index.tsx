@@ -1,10 +1,13 @@
 import React from 'react';
 import * as E from './elements';
+import * as GE from 'components/globalElements';
 
-const GamesList=()=>{
-    return(
+const GamesList = () => {
+    return (
         <E.GamesListWrapper>
-            Список игр
+            <GE.ContentWrapper>
+                Список игр
+            </GE.ContentWrapper>
         </E.GamesListWrapper>
     )
 }
