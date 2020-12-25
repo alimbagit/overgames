@@ -4,7 +4,8 @@ import * as GE from 'components/globalElements';
 import Search from './search';
 import Logo from './logo';
 import Filter from './filter';
-import { Grid } from '@material-ui/core';
+import { Grid, Container } from '@material-ui/core';
+
 
 const Header = () => {
     return (

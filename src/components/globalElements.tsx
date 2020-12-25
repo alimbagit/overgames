@@ -1,8 +1,12 @@
-import styled from 'styled-components';
-import { } from '@material-ui/core';
+import styled from "styled-components";
+import { Container, ContainerProps } from "@material-ui/core";
 
+export const ContentWrapper = styled(Container).attrs(
+  (props: ContainerProps) => ({
+    maxWidth:  "md",
 
-export const ContentWrapper = styled.div`
-    width:960px;
-    margin:0 auto 0 auto;
+    ...props,
+  })
+)`
+  margin: 0 auto 0 auto;
 `;

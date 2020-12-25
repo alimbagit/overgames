@@ -1,13 +1,16 @@
-import React from 'react';
-import * as E from './elements';
-import { Typography } from '@material-ui/core';
+import React from "react";
+import * as E from "./elements";
+import { Link, Typography } from "@material-ui/core";
 
+/**Логотип в загловке */
 const Logo = () => {
-    return (
-        <E.LogoWrapper>
-            <Typography variant="h5">OverGame</Typography>
-        </E.LogoWrapper>
-    )
-}
+  return (
+    <E.LogoWrapper>
+      <Link href="/">
+        <Typography variant="h5">OverGame</Typography>
+      </Link>
+    </E.LogoWrapper>
+  );
+};
 
 export default Logo;
