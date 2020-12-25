@@ -1,45 +1,40 @@
-import { InputAdornment, TextField } from '@material-ui/core';
-import SearchIcon from '@material-ui/icons/Search';
-import React, { useState } from 'react';
-import * as E from './elements';
+import { InputAdornment, TextField } from "@material-ui/core";
+import SearchIcon from "@material-ui/icons/Search";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setSearchLine } from "utils/myRedux/actions";
+import { State } from "utils/myRedux/rootReducer";
+
+import * as E from "./elements";
 
 const Search = () => {
+  const dispatch = useDispatch();
+  const searchLine = useSelector((state: State) => state.searchLine);
 
-    const [searchValue, setSearchValue] = useState("");
-    const [searchResults, setSearchResults] = useState([]);
+  /**Получает строку поиска и меняет поле searchLine в redux харнилище
+   * @param value - строка поиска
+   */
+  const SearchLineChange = (value: string) => {
+    dispatch(setSearchLine(value));
+  };
 
-    /**Получает строку поиска и производит поиск
-     * @param value - строка поиска
-     * @return Массив объектов
-     */
-    const SearchProcess = (value:string) => {
-        
-        setSearchValue(value);
-
-    }
-    return (
-        <E.SearchWrapper>
-            {/* <SearchBar
-                value={searchValue}
-                onChange={SearchProcess}
-            // onRequestSearch={() => doSomethingWith(this.state.value)}
-            /> */}
-
-            <TextField
-                // label="TextField"
-                onChange={(e)=>SearchProcess(e.target.value)}
-                placeholder={"search"}
-                size={"small"}
-                InputProps={{
-                    startAdornment: (
-                        <InputAdornment position="start">
-                            <SearchIcon />
-                        </InputAdornment>
-                    ),
-                }}
-            />
-        </E.SearchWrapper>
-    )
-}
+  return (
+    <E.SearchWrapper>
+      <TextField
+        onChange={(e) => SearchLineChange(e.target.value)}
+        placeholder={"search"}
+        value={searchLine}
+        size={"small"}
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <SearchIcon />
+            </InputAdornment>
+          ),
+        }}
+      />
+    </E.SearchWrapper>
+  );
+};
 
 export default Search;
