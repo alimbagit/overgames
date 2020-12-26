@@ -2,8 +2,8 @@ import { InputAdornment, TextField } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setSearchLine } from "utils/myRedux/actions";
-import { State } from "utils/myRedux/rootReducer";
+import { setSearchLine } from "store/actions";
+import { State } from "store/rootReducer";
 
 import * as E from "./elements";
 

@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import * as E from "./elements";
 import * as GE from "components/globalElements";
-import { Card, Grid, Typography } from "@material-ui/core";
-import { getGames } from "utils/serverApi";
-import { setGamesList } from "utils/myRedux/actions";
+import { Grid } from "@material-ui/core";
+import { loadGames } from "services";
+import { setGamesList } from "store/actions";
 import { useDispatch, useSelector } from "react-redux";
-import { State } from "utils/myRedux/rootReducer";
-import { orderingId, platformsId } from "utils/serverApi";
+import { State } from "store/rootReducer";
+import GameCard from './gameCard';
 
 const GamesList = () => {
   const dispatch = useDispatch();
@@ -16,14 +16,14 @@ const GamesList = () => {
   const searchLine = useSelector((state: State) => state.searchLine);
 
   useEffect(() => {
-    getGames(
-      platformsId.get(platform) as string,
-      orderingId.get(orderBy) as string,
-      searchLine
-    ).then((result) => {
+    loadGames({
+      orderBy,
+      platform,
+      search: searchLine,
+    }).then((result) => {
       dispatch(setGamesList(result));
     });
-  }, [orderBy, platform, searchLine]);
+  }, [dispatch, orderBy, platform, searchLine]);
 
   const gamesList = useSelector((state: State) => state.gamesList);
 
@@ -34,11 +34,8 @@ const GamesList = () => {
           {gamesList.map((game, index) => {
             return (
               <Grid key={index.toString()} item xs={6} md={3}>
-                <Card>
-                  <Typography>{game.name}</Typography>
-                  <Typography>{game.released}</Typography>
-                  <Typography>{game.rating}</Typography>
-                </Card>
+
+                <GameCard {...game} />
               </Grid>
             );
           })}

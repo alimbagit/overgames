@@ -6,29 +6,26 @@ import {
   SET_ORDER_BY,
   SET_PLATFORM,
   SET_SEARCH_LINE,
+  LOAD_PLATFORMS
 } from "./types";
-import { orderingId, platformsId } from "utils/serverApi";
+import { IGameInfo, IPlatform, ORDER_FIELD } from 'models'
 
-export type GameParameters = {
-  backgroundImage: string;
-  name: string;
-  screensohts: string[];
-  released: string;
-  slug: string;
-  rating: number;
-};
 export type State = {
-  gamesList: GameParameters[];
-  searchLine: string;
+  gamesList: IGameInfo[];
+  searchLine?: string;
   orderBy: string;
-  platform: string;
+  platform?: string;
+  isLoading: boolean;
+  platforms: IPlatform[];
+  error: boolean;
 };
 
 const initialState: State = {
   gamesList: [],
-  orderBy: Array.from(orderingId.keys())[0],
-  platform: Array.from(platformsId.keys())[0],
-  searchLine: "",
+  isLoading: false,
+  platforms: [],
+  error: false,
+  orderBy: ORDER_FIELD.ADDED
 };
 
 console.log("initialState=", initialState);
@@ -70,6 +67,18 @@ export const rootReducer = (
     case SET_SEARCH_LINE:
       new_state.searchLine = action.payload.searchLine;
       return new_state;
+
+    /** Обработка загрузки списка платформ. */
+    case LOAD_PLATFORMS:
+      new_state.isLoading = action.payload.loading
+      if (action.payload.data) {
+        new_state.platforms = action.payload.data
+      }
+      if (action.payload.error) {
+        new_state.error = action.payload.error
+      }
+      return new_state;
+
     default:
       return new_state;
   }
