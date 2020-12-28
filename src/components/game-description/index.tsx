@@ -6,6 +6,8 @@ import { loadGameDescription } from 'services';
 import BackButton from './back-button';
 import GameDescriptionViewer from './game-description-viewer';
 import LoadingAnimate from 'components/loading-animate';
+import * as GE from 'components/globalElements';
+
 
 interface IParams {
   game_name: string;
@@ -18,13 +20,13 @@ const GameDescription: React.FC<RouteComponentProps> = ({ location, match }) => 
 
   useEffect(() => {
     loadGameDescription(game_name).then((result) => setGameDescription(result));
-  }, [])
+  }, []);
 
   return (
-    <div>
+    <GE.ContentWrapper>
       <BackButton />
       {gameDescription ? <GameDescriptionViewer {...gameDescription} /> : <LoadingAnimate />}
-    </div>
+    </GE.ContentWrapper>
   )
 };
 

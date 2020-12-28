@@ -7,7 +7,7 @@ const GameDescriptionViewer = ({ name, parent_platforms, description, released, 
 
   return (
     <div>
-      <Typography>{name}</Typography>
+      <Typography variant="h2">{name}</Typography>
       <Typography>{background_image}</Typography>
       <Typography>{released}</Typography>
       <Typography>{description}</Typography>
