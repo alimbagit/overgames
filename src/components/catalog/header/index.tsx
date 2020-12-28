@@ -4,13 +4,17 @@ import * as GE from 'components/globalElements';
 import Search from './search';
 import Logo from './logo';
 import Filter from './filter';
-import { Grid, Container } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
+import { useTheme } from '@material-ui/core/styles';
+
 
 
 const Header = () => {
+
+  const theme = useTheme();
   return (
-    <E.HeaderWrapper>
-      <GE.ContentWrapper>
+    <E.HeaderWrapper style={{ backgroundColor: theme.palette.primary.light }}>
+      <GE.ContentWrapper >
         <E.HeaderContent>
           <Grid container spacing={3} alignItems="center">
             <Grid item xs={6} lg={4} >

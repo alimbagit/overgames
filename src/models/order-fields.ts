@@ -3,4 +3,6 @@ export enum ORDER_FIELD {
     RELEASED = 'released',
     ADDED = 'added',
     RATING = 'rating',
+    RELEVANCE = 'relevance',
+    CREATED = 'created'
 }

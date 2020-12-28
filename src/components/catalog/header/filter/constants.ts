@@ -16,5 +16,13 @@ export const ORDER_OPTIONS = [
     {
         value: ORDER_FIELD.RATING,
         label: 'Average rating',
-    }
+    },
+    {
+        value: ORDER_FIELD.RELEVANCE,
+        label: 'Relevance',
+    },
+    {
+        value: ORDER_FIELD.CREATED,
+        label: 'Date added',
+    },
 ]

@@ -1,42 +1,30 @@
-import { State } from "./rootReducer";
 import {
-  SET_INITIAL_VALUES,
   ADD_GAMES,
-  SET_GAMES_LIST,
   SET_ORDER_BY,
   SET_PLATFORM,
   SET_SEARCH_LINE,
   LOAD_PLATFORMS,
+  LOAD_GAMES
 } from "./types";
 import * as services from 'services'
 import { IGameInfo, IPlatform } from 'models'
-import { ThunkAction } from 'redux-thunk'
-import { Action } from 'redux'
-
-/**Устанавливает начальные значения */
-export function setInitialValues(initialState: State) {
-  return {
-    type: SET_INITIAL_VALUES,
-    payload: { initialState },
-  };
-}
 
 interface ILoadPlatformsAction {
   type: typeof LOAD_PLATFORMS,
   payload: {
-    loading: boolean;
+    loadingPlatforms: boolean;
     data: IPlatform[];
     error: boolean;
   }
 }
 
-
+/**Загрузка платформ */
 export function loadPlatforms(dispatch: any) {
 
   dispatch({
     type: LOAD_PLATFORMS,
     payload: {
-      loading: true
+      loadingPlatforms: true
     }
   })
 
@@ -60,22 +48,52 @@ export function loadPlatforms(dispatch: any) {
   })
 }
 
+interface ILoadGamesAction {
+  type: typeof LOAD_GAMES,
+  payload: {
+    loadingGames: boolean;
+    data: IGameInfo[];
+    error: boolean;
+  }
+}
+
+/**Загрузка игр по новому фильтру */
+export function loadGames(params: services.ILoadGames) {
+  return ((dispatch: any) => {
+    dispatch({
+      type: LOAD_GAMES,
+      payload: {
+        loadingGames: true
+      }
+    })
+
+    services.loadGames(params).then(games => {
+
+      dispatch({
+        type: LOAD_GAMES,
+        payload: {
+          loadingGames: false,
+          data: games,
+        }
+      })
+    }).catch(() => {
+      dispatch({
+        type: LOAD_GAMES,
+        payload: {
+          loadingGames: false,
+          error: true,
+        }
+      })
+    })
+  })
+}
+
 /**Добавление игр следующей страницей
  * @param gamesList - список игр
  */
 export function addGames(gamesList: IGameInfo[]) {
   return {
     type: ADD_GAMES,
-    payload: { gamesList },
-  };
-}
-
-/**Загрузка игр по новому фильтру
- * @param gamesList - список игр
- */
-export function setGamesList(gamesList: IGameInfo[]) {
-  return {
-    type: SET_GAMES_LIST,
     payload: { gamesList },
   };
 }
@@ -105,10 +123,9 @@ export function setSearchLine(searchLine: string) {
 }
 
 export type Actions =
-  | ReturnType<typeof setInitialValues>
   | ReturnType<typeof addGames>
-  | ReturnType<typeof setGamesList>
   | ReturnType<typeof setOrderBy>
   | ReturnType<typeof setSearchLine>
   | ReturnType<typeof setPlatform>
-  | ILoadPlatformsAction;
+  | ILoadPlatformsAction
+  | ILoadGamesAction;

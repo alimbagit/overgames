@@ -59,8 +59,8 @@ const Filter = () => {
           value={platform}
           onChange={(e) => handleChangePlatform(e.target.value as string)}
         >
-          <MenuItem value="">
-            <em>None</em>
+          <MenuItem value="All">
+            All
           </MenuItem>
           {platforms.map(({ name, id }) => (
             <MenuItem key={id} value={id}>

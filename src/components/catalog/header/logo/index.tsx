@@ -6,9 +6,7 @@ import { Link, Typography } from "@material-ui/core";
 const Logo = () => {
   return (
     <E.LogoWrapper>
-      <Link href="/">
-        <Typography variant="h5">OverGame</Typography>
-      </Link>
+      <Typography variant="h5">OverGames</Typography>
     </E.LogoWrapper>
   );
 };
