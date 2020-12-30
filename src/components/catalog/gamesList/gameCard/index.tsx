@@ -3,7 +3,8 @@ import * as E from "./elements";
 import { Button, Card, CardActions, CardContent, Typography } from "@material-ui/core";
 import { IGameInfo } from "models";
 import { useTheme } from '@material-ui/core/styles';
-import { Link } from 'react-router-dom';
+import * as GE from "components/globalElements";
+
 
 
 const GameCard = ({ name, released, rating, backgroundImage, screenshots, slug }: IGameInfo) => {
@@ -18,9 +19,9 @@ const GameCard = ({ name, released, rating, backgroundImage, screenshots, slug }
           <Typography>Rating: {rating}</Typography>
         </CardContent>
         <CardActions >
-          <Link to={"/game/" + slug}>
+          <GE.Link to={"/game/" + slug}>
             <Button variant="text" color="secondary" size="small" >Learn More</Button>
-          </Link>
+          </GE.Link>
         </CardActions>
       </Card>
     </E.OneGameWrapper>
