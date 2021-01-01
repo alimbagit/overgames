@@ -13,12 +13,13 @@ const GamesList = () => {
   const orderBy = useSelector((state: State) => state.orderBy);
   const platform = useSelector((state: State) => state.platform);
   const searchLine = useSelector((state: State) => state.searchLine);
-
+  const gamesList = useSelector((state: State) => state.gamesList);
+  
   useEffect(() => {
     dispatch(loadGames({ orderBy, platform, search: searchLine }));
   }, [dispatch, orderBy, platform, searchLine]);
 
-  const gamesList = useSelector((state: State) => state.gamesList);
+  
 
   return (
     <E.GamesListWrapper>

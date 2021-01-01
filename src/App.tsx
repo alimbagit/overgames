@@ -8,9 +8,11 @@ import { Provider as ReduxProvider } from "react-redux";
 import { rootReducer } from "store/rootReducer";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
-import { BrowserRouter as Router, Redirect, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import Catalog from "components/catalog";
 import GameDescription from "components/game-description";
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
+
 
 
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
