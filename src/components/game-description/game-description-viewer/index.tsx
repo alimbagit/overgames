@@ -1,11 +1,8 @@
-import { Typography } from '@material-ui/core';
-import { IGameDescription } from 'models/game-description';
-import React from 'react';
-import { Carousel } from 'react-responsive-carousel';
+import { Typography, Grid } from "@material-ui/core";
+import { IGameDescription } from "models/game-description";
+import ScreenSlider from "./screen-slider";
+import React from "react";
 import * as E from "./elements";
-// import 'react-responsive-carousel/lib/styles/carousel.min.css';
-
-
 
 const GameDescriptionViewer = ({
   name,
@@ -17,24 +14,23 @@ const GameDescriptionViewer = ({
   clip,
   rating,
   slug,
-  website
+  website,
 }: IGameDescription) => {
-
   return (
-    <div>
-      <Typography variant="h2">{name}</Typography>
-      <Typography>{background_image}</Typography>
-      <Typography>{released}</Typography>
-      <Typography>{description}</Typography>
-      <E.CarouselWrapper>
-        <Carousel emulateTouch showThumbs infiniteLoop>
-          {screenshots && screenshots.map((screen, index) => (
-            <E.ImageWrapper key={index.toString()}><E.Img alt="" src={screen.image} /></E.ImageWrapper>
-          ))}
-        </Carousel>
-      </E.CarouselWrapper>
-    </div>
-  )
+    <Grid container spacing={3}>
+      <Grid item xs={12}>
+        <Typography variant="h3">{name}</Typography>
+      </Grid>
+      <Grid item xs={12}>
+        <ScreenSlider screenshots={screenshots} />
+      </Grid>
+      <Grid item xs={12}>
+        {/* <Typography>{background_image}</Typography> */}
+        <Typography>{released}</Typography>
+        <Typography>{description}</Typography>
+      </Grid>
+    </Grid>
+  );
 };
 
 export default GameDescriptionViewer;

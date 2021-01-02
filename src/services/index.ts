@@ -22,7 +22,6 @@ export const loadGames = async ({ orderBy, platform, search }: ILoadGames) => {
   search && url.searchParams.set("search", search);
   const response = await fetch(url.toString());
   const result = await response.json();
-  console.log("result=", result);
   const gameList = (result.results as any[]).map(rawDataToGameInfoMapper);
   return gameList;
 };
@@ -38,6 +37,5 @@ export const loadGameDescription = async (gameName: string) => {
   const screenshots_response = await fetch(url.toString());
   const screenshots_json = await screenshots_response.json();
   gameDescription.screenshots=screenshots_json.results;
-  console.log(gameDescription);
   return gameDescription;
 };

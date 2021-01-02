@@ -11,8 +11,6 @@ import thunk from "redux-thunk";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Catalog from "components/catalog";
 import GameDescription from "components/game-description";
-import 'react-responsive-carousel/lib/styles/carousel.min.css';
-
 
 
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));

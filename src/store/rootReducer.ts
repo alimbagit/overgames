@@ -31,8 +31,6 @@ const initialState: State = {
   searchLine: ""
 };
 
-console.log("initialState=", initialState);
-
 export const rootReducer = (
   state: State = initialState,
   action: Actions
