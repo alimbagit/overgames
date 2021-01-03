@@ -6,6 +6,7 @@ import { loadGames } from "store/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { State } from "store/rootReducer";
 import GameCard from './gameCard';
+import LoadingAnimate from "components/loading-animate";
 
 const GamesList = () => {
   const dispatch = useDispatch();
@@ -24,6 +25,7 @@ const GamesList = () => {
   return (
     <E.GamesListWrapper>
       <GE.ContentWrapper>
+        {gamesList.length ?
         <Grid container direction="row" alignItems="stretch" spacing={3}>
           {gamesList.map((game, index) => {
             return (
@@ -34,6 +36,8 @@ const GamesList = () => {
             );
           })}
         </Grid>
+      :<LoadingAnimate/>  
+      }
       </GE.ContentWrapper>
     </E.GamesListWrapper>
   );

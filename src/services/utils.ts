@@ -19,23 +19,19 @@ export const rawDataToGameInfoMapper = ({
 
 /**Преобразует json формат в тип данных GameDescription */
 export const rawDataToGameDescription = ({
-    background_image,
     clip,
-    description,
+    description_raw:description,
     name,
     parent_platforms,
     rating,
     released,
-    slug,
     website
 }: any): IGameDescription => ({
-    background_image,
     clip,
     description,
     name,
     parent_platforms,
     rating,
     released,
-    slug,
     website
 });

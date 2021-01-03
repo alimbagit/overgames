@@ -1,33 +1,70 @@
-import { Typography, Grid } from "@material-ui/core";
+import { Typography, Grid, Chip, Link } from "@material-ui/core";
 import { IGameDescription } from "models/game-description";
 import ScreenSlider from "./screen-slider";
 import React from "react";
-import * as E from "./elements";
+import PlatformChipsCreator from "./platform-chips-creator";
+
+import {
+  EventAvailable as EventAvailableIcon,
+  AddShoppingCart as AddShoppingCartIcon,
+  Stars as StarsIcon,
+} from "@material-ui/icons";
 
 const GameDescriptionViewer = ({
   name,
   parent_platforms,
   description,
   released,
-  background_image,
   screenshots,
   clip,
   rating,
-  slug,
   website,
 }: IGameDescription) => {
   return (
     <Grid container spacing={3}>
+      {/* Название игры */}
       <Grid item xs={12}>
         <Typography variant="h3">{name}</Typography>
+      </Grid>
+      {/* Значки */}
+      <Grid item container spacing={2}>
+        {/* Значок рейтинга */}
+        <Grid item>
+          <Chip
+            icon={<StarsIcon />}
+            label={rating}
+            variant="outlined"
+            title="rating"
+          />
+        </Grid>
+        {/* Значок даты релиза */}
+        <Grid item>
+          <Chip
+            icon={<EventAvailableIcon />}
+            label={released}
+            variant="outlined"
+            title="released date"
+          />
+        </Grid>
+        {/* Значки для платформ */}
+        {PlatformChipsCreator(parent_platforms)}
+        {/* Значок для ссылки на веб-сайт */}
+        <Grid item>
+          <Chip
+            icon={<AddShoppingCartIcon />}
+            variant="outlined"
+            label={<Link href={website}>go to website</Link>}
+          />
+        </Grid>
       </Grid>
       <Grid item xs={12}>
         <ScreenSlider screenshots={screenshots} />
       </Grid>
       <Grid item xs={12}>
-        {/* <Typography>{background_image}</Typography> */}
-        <Typography>{released}</Typography>
         <Typography>{description}</Typography>
+      </Grid>
+      <Grid item xs={12}>
+        <video controls src={clip?.clip} width={"100%"}></video>
       </Grid>
     </Grid>
   );

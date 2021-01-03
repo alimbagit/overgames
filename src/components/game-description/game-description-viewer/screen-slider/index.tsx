@@ -15,20 +15,24 @@ const ScreenSlider = ({ screenshots }: IScreenSlider) => {
 
   useEffect(() => {
     if (window.innerWidth > 500) setIsMobileDevice(false);
-    else setIsMobileDevice(true)
+    else setIsMobileDevice(true);
   }, [isMobileDevice]);
 
   return (
     <>
-      {screenshots && (
-        <Carousel emulateTouch swipeScrollTolerance={2} transitionTime={600} showThumbs={!isMobileDevice}>
-          {screenshots.map((screen, index) => (
+      <Carousel
+        emulateTouch
+        swipeScrollTolerance={2}
+        transitionTime={600}
+        showThumbs={!isMobileDevice}
+      >
+        {screenshots &&
+          screenshots.map((screen, index) => (
             <div key={index.toString()}>
               <img alt="" src={screen.image} />
             </div>
           ))}
-        </Carousel>
-      )}
+      </Carousel>
     </>
   );
 };

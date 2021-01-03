@@ -1,12 +1,12 @@
-import { rawDataToGameInfoMapper, rawDataToGameDescription } from './utils'
-import { IPlatform, IGameDescription } from 'models'
+import { rawDataToGameInfoMapper, rawDataToGameDescription } from "./utils";
+import { IPlatform } from "models";
 
 /**Загружает список платформ */
 export const loadPlatforms = async () => {
-  const response = await fetch('https://api.rawg.io/api/platforms')
-  const responseResult = await response.json()
+  const response = await fetch("https://api.rawg.io/api/platforms");
+  const responseResult = await response.json();
   return responseResult.results as IPlatform[];
-}
+};
 
 export interface ILoadGames {
   orderBy: string;
@@ -17,7 +17,7 @@ export interface ILoadGames {
 /**Загружает данные по параметрам api */
 export const loadGames = async ({ orderBy, platform, search }: ILoadGames) => {
   let url = new URL("https://api.rawg.io/api/games");
-  (platform && platform !== "All") && url.searchParams.set("platform", platform);
+  platform && platform !== "All" && url.searchParams.set("platform", platform);
   orderBy && url.searchParams.set("ordering", orderBy);
   search && url.searchParams.set("search", search);
   const response = await fetch(url.toString());
@@ -25,7 +25,6 @@ export const loadGames = async ({ orderBy, platform, search }: ILoadGames) => {
   const gameList = (result.results as any[]).map(rawDataToGameInfoMapper);
   return gameList;
 };
-
 
 /**Загружает описание одной игры */
 export const loadGameDescription = async (gameName: string) => {
@@ -36,6 +35,6 @@ export const loadGameDescription = async (gameName: string) => {
   url = new URL(url.toString() + "/screenshots"); //Скриншоты загружаются отдельным запросом
   const screenshots_response = await fetch(url.toString());
   const screenshots_json = await screenshots_response.json();
-  gameDescription.screenshots=screenshots_json.results;
+  gameDescription.screenshots = screenshots_json.results;
   return gameDescription;
 };
