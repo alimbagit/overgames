@@ -8,10 +8,11 @@ import { Grid } from '@material-ui/core';
 import { useTheme } from '@material-ui/core/styles';
 
 
-
 const Header = () => {
 
   const theme = useTheme();
+
+  
   return (
     <E.HeaderWrapper style={{ backgroundColor: theme.palette.primary.light }}>
       <GE.ContentWrapper >

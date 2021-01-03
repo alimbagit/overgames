@@ -38,14 +38,16 @@ const GameDescriptionViewer = ({
           />
         </Grid>
         {/* Значок даты релиза */}
-        <Grid item>
-          <Chip
-            icon={<EventAvailableIcon />}
-            label={released}
-            variant="outlined"
-            title="released date"
-          />
-        </Grid>
+        {released && (
+          <Grid item>
+            <Chip
+              icon={<EventAvailableIcon />}
+              label={released}
+              variant="outlined"
+              title="released date"
+            />
+          </Grid>
+        )}
         {/* Значки для платформ */}
         {PlatformChipsCreator(parent_platforms)}
         {/* Значок для ссылки на веб-сайт */}
@@ -63,9 +65,11 @@ const GameDescriptionViewer = ({
       <Grid item xs={12}>
         <Typography>{description}</Typography>
       </Grid>
-      <Grid item xs={12}>
-        <video controls src={clip?.clip} width={"100%"}></video>
-      </Grid>
+      {clip && (
+        <Grid item xs={12}>
+          <video controls src={clip?.clip} width={"100%"}></video>
+        </Grid>
+      )}
     </Grid>
   );
 };

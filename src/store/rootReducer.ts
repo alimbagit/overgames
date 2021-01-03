@@ -16,6 +16,7 @@ export type State = {
   platform?: string;
   isLoadingPlatforms: boolean;
   isLoadingGames: boolean;
+  isAddingGames: boolean;
   platforms: IPlatform[];
   error: boolean;
 };
@@ -24,6 +25,7 @@ const initialState: State = {
   gamesList: [],
   isLoadingPlatforms: false,
   isLoadingGames:false,
+  isAddingGames:false,
   platforms: [],
   error: false,
   orderBy: ORDER_FIELD.RELEVANCE,
