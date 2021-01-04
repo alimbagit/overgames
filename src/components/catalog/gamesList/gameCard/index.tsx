@@ -2,13 +2,12 @@ import React from "react";
 import * as E from "./elements";
 import { Button, Card, CardActions, CardContent, Typography } from "@material-ui/core";
 import { IGameInfo } from "models";
-import { useTheme } from '@material-ui/core/styles';
 import * as GE from "components/globalElements";
 
 
 
 const GameCard = ({ name, released, rating, backgroundImage, screenshots, slug }: IGameInfo) => {
-  const theme = useTheme();
+
   return (
     <E.OneGameWrapper>
       <Card variant="elevation">

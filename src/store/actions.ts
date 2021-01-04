@@ -4,97 +4,132 @@ import {
   SET_PLATFORM,
   SET_SEARCH_LINE,
   LOAD_PLATFORMS,
-  LOAD_GAMES
+  LOAD_GAMES,
+  AppThunk,
 } from "./types";
-import * as services from 'services'
-import { IGameInfo, IPlatform } from 'models'
+import * as services from "services";
+import { IGameInfo, IPlatform } from "models";
 
 interface ILoadPlatformsAction {
-  type: typeof LOAD_PLATFORMS,
+  type: typeof LOAD_PLATFORMS;
   payload: {
     loadingPlatforms: boolean;
     data: IPlatform[];
     error: boolean;
-  }
+  };
 }
 
 /**Загрузка платформ */
-export function loadPlatforms(dispatch: any) {
-
+export const loadPlatforms = (): AppThunk => (dispatch) => {
   dispatch({
     type: LOAD_PLATFORMS,
     payload: {
-      loadingPlatforms: true
-    }
-  })
+      loadingPlatforms: true,
+    },
+  });
 
-  services.loadPlatforms().then(platforms => {
-
-    dispatch({
-      type: LOAD_PLATFORMS,
-      payload: {
-        loading: false,
-        data: platforms,
-      }
+  services
+    .loadPlatforms()
+    .then((platforms) => {
+      dispatch({
+        type: LOAD_PLATFORMS,
+        payload: {
+          loading: false,
+          data: platforms,
+        },
+      });
     })
-  }).catch(() => {
-    dispatch({
-      type: LOAD_PLATFORMS,
-      payload: {
-        loading: false,
-        error: true,
-      }
-    })
-  })
-}
+    .catch(() => {
+      dispatch({
+        type: LOAD_PLATFORMS,
+        payload: {
+          loading: false,
+          error: true,
+        },
+      });
+    });
+};
 
 interface ILoadGamesAction {
-  type: typeof LOAD_GAMES,
+  type: typeof LOAD_GAMES;
   payload: {
     loadingGames: boolean;
     data: IGameInfo[];
     error: boolean;
-  }
+  };
 }
 
 /**Загрузка игр по новому фильтру */
-export function loadGames(params: services.ILoadGames) {
-  return ((dispatch: any) => {
+export function loadGames(params: services.ILoadGames): AppThunk {
+  return (dispatch) => {
     dispatch({
       type: LOAD_GAMES,
       payload: {
-        loadingGames: true
-      }
-    })
+        loadingGames: true,
+      },
+    });
 
-    services.loadGames(params).then(games => {
-
-      dispatch({
-        type: LOAD_GAMES,
-        payload: {
-          loadingGames: false,
-          data: games,
-        }
+    services
+      .loadGames(params)
+      .then((games) => {
+        dispatch({
+          type: LOAD_GAMES,
+          payload: {
+            loadingGames: false,
+            data: games,
+          },
+        });
       })
-    }).catch(() => {
-      dispatch({
-        type: LOAD_GAMES,
-        payload: {
-          loadingGames: false,
-          error: true,
-        }
-      })
-    })
-  })
+      .catch(() => {
+        dispatch({
+          type: LOAD_GAMES,
+          payload: {
+            loadingGames: false,
+            error: true,
+          },
+        });
+      });
+  };
 }
 
-/**Добавление игр следующей страницей
- * @param gamesList - список игр
- */
-export function addGames(gamesList: IGameInfo[]) {
-  return {
-    type: ADD_GAMES,
-    payload: { gamesList },
+interface IAddGamesAction {
+  type: typeof ADD_GAMES;
+  payload: {
+    loadingGames: boolean;
+    data: IGameInfo[];
+    error: boolean;
+  };
+}
+/**Добавление игр следующей страницы*/
+export function addGames(params: services.ILoadGames): AppThunk {
+  return (dispatch) => {
+    dispatch({
+      type: ADD_GAMES,
+      payload: {
+        addGames: true,
+      },
+    });
+
+    services
+      .addGames(params)
+      .then((games) => {
+        dispatch({
+          type: ADD_GAMES,
+          payload: {
+            addGames: false,
+            data: games,
+          },
+        });
+      })
+      .catch(() => {
+        dispatch({
+          type: ADD_GAMES,
+          payload: {
+            addGames: false,
+            error: true,
+          },
+        });
+      });
   };
 }
 
@@ -123,9 +158,9 @@ export function setSearchLine(searchLine: string) {
 }
 
 export type Actions =
-  | ReturnType<typeof addGames>
   | ReturnType<typeof setOrderBy>
   | ReturnType<typeof setSearchLine>
   | ReturnType<typeof setPlatform>
   | ILoadPlatformsAction
+  | IAddGamesAction
   | ILoadGamesAction;

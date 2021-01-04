@@ -20,7 +20,7 @@ const GameDescription: React.FC<RouteComponentProps> = ({ location, match }) => 
 
   useEffect(() => {
     loadGameDescription(game_name).then((result) => setGameDescription(result));
-  }, []);
+  }, [game_name]);
 
   return (
     <GE.ContentWrapper>

@@ -5,9 +5,9 @@ import {
   SET_PLATFORM,
   SET_SEARCH_LINE,
   LOAD_PLATFORMS,
-  LOAD_GAMES
+  LOAD_GAMES,
 } from "./types";
-import { IGameInfo, IPlatform, ORDER_FIELD } from 'models'
+import { IGameInfo, IPlatform, ORDER_FIELD } from "models";
 
 export type State = {
   gamesList: IGameInfo[];
@@ -19,18 +19,20 @@ export type State = {
   isAddingGames: boolean;
   platforms: IPlatform[];
   error: boolean;
+  currentPage: number;
 };
 
 const initialState: State = {
   gamesList: [],
   isLoadingPlatforms: false,
-  isLoadingGames:false,
-  isAddingGames:false,
+  isLoadingGames: false,
+  isAddingGames: false,
   platforms: [],
   error: false,
   orderBy: ORDER_FIELD.RELEVANCE,
   platform: "All",
-  searchLine: ""
+  searchLine: "",
+  currentPage: 1,
 };
 
 export const rootReducer = (
@@ -39,12 +41,16 @@ export const rootReducer = (
 ): State => {
   const new_state = JSON.parse(JSON.stringify(state)) as State;
   switch (action.type) {
-
     /**Добавление игр в список */
     case ADD_GAMES:
-      new_state.gamesList = new_state.gamesList.concat(
-        action.payload.gamesList
-      );
+      new_state.isAddingGames = action.payload.loadingGames;
+      if (action.payload.data) {
+        new_state.gamesList = new_state.gamesList.concat(action.payload.data);
+        new_state.currentPage++;
+      }
+      if (action.payload.error) {
+        new_state.error = action.payload.error;
+      }
       return new_state;
 
     /**Установка параметра соритровки*/
@@ -64,23 +70,24 @@ export const rootReducer = (
 
     /** Обработка загрузки списка платформ. */
     case LOAD_PLATFORMS:
-      new_state.isLoadingPlatforms = action.payload.loadingPlatforms
+      new_state.isLoadingPlatforms = action.payload.loadingPlatforms;
       if (action.payload.data) {
-        new_state.platforms = action.payload.data
+        new_state.platforms = action.payload.data;
       }
       if (action.payload.error) {
-        new_state.error = action.payload.error
+        new_state.error = action.payload.error;
       }
       return new_state;
 
     /** Обработка загрузки списка игр. */
     case LOAD_GAMES:
-      new_state.isLoadingGames=action.payload.loadingGames;
-      if(action.payload.data){
-        new_state.gamesList=action.payload.data;
+      new_state.isLoadingGames = action.payload.loadingGames;
+      new_state.currentPage = 1;
+      if (action.payload.data) {
+        new_state.gamesList = action.payload.data;
       }
-      if(action.payload.error){
-        new_state.error=action.payload.error;
+      if (action.payload.error) {
+        new_state.error = action.payload.error;
       }
       return new_state;
 

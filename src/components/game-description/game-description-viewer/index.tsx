@@ -27,36 +27,38 @@ const GameDescriptionViewer = ({
         <Typography variant="h3">{name}</Typography>
       </Grid>
       {/* Значки */}
-      <Grid item container spacing={2}>
-        {/* Значок рейтинга */}
-        <Grid item>
-          <Chip
-            icon={<StarsIcon />}
-            label={rating}
-            variant="outlined"
-            title="rating"
-          />
-        </Grid>
-        {/* Значок даты релиза */}
-        {released && (
+      <Grid item xs={12}>
+        <Grid container spacing={2}>
+          {/* Значок рейтинга */}
           <Grid item>
             <Chip
-              icon={<EventAvailableIcon />}
-              label={released}
+              icon={<StarsIcon />}
+              label={rating}
               variant="outlined"
-              title="released date"
+              title="rating"
             />
           </Grid>
-        )}
-        {/* Значки для платформ */}
-        {PlatformChipsCreator(parent_platforms)}
-        {/* Значок для ссылки на веб-сайт */}
-        <Grid item>
-          <Chip
-            icon={<AddShoppingCartIcon />}
-            variant="outlined"
-            label={<Link href={website}>go to website</Link>}
-          />
+          {/* Значок даты релиза */}
+          {released && (
+            <Grid item>
+              <Chip
+                icon={<EventAvailableIcon />}
+                label={released}
+                variant="outlined"
+                title="released date"
+              />
+            </Grid>
+          )}
+          {/* Значки для платформ */}
+          {PlatformChipsCreator(parent_platforms)}
+          {/* Значок для ссылки на веб-сайт */}
+          <Grid item>
+            <Chip
+              icon={<AddShoppingCartIcon />}
+              variant="outlined"
+              label={<Link href={website}>go to website</Link>}
+            />
+          </Grid>
         </Grid>
       </Grid>
       <Grid item xs={12}>

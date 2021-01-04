@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
-import * as E from "./elements";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
-import breakpoint from "styled-components-breakpoint";
 
 export interface IScreenSlider {
   screenshots?: {

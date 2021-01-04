@@ -15,7 +15,7 @@ const Filter = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(loadPlatforms)
+    dispatch(loadPlatforms())
   }, [dispatch])
 
   const handleOrderBy = (value: string) => {

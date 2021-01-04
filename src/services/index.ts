@@ -12,14 +12,28 @@ export interface ILoadGames {
   orderBy: string;
   platform?: string;
   search?: string;
+  page?:number;
 }
 
-/**Загружает данные по параметрам api */
-export const loadGames = async ({ orderBy, platform, search }: ILoadGames) => {
+/**Загружает список игр по параметрам api */
+export const loadGames = async ({ orderBy, platform, search}: ILoadGames) => {
   let url = new URL("https://api.rawg.io/api/games");
   platform && platform !== "All" && url.searchParams.set("platform", platform);
   orderBy && url.searchParams.set("ordering", orderBy);
   search && url.searchParams.set("search", search);
+  const response = await fetch(url.toString());
+  const result = await response.json();
+  const gameList = (result.results as any[]).map(rawDataToGameInfoMapper);
+  return gameList;
+};
+
+/**Загружает список игр по параметрам api и номеру страницы*/
+export const addGames = async ({ orderBy, platform, search, page}: ILoadGames) => {
+  let url = new URL("https://api.rawg.io/api/games");
+  platform && platform !== "All" && url.searchParams.set("platform", platform);
+  orderBy && url.searchParams.set("ordering", orderBy);
+  search && url.searchParams.set("search", search);
+  page && url.searchParams.set("page", page.toString());
   const response = await fetch(url.toString());
   const result = await response.json();
   const gameList = (result.results as any[]).map(rawDataToGameInfoMapper);
