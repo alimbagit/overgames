@@ -1,12 +1,14 @@
 import React from "react";
 import * as E from "./elements";
-import { Typography } from "@material-ui/core";
+import { Link } from "@material-ui/core";
 
 /**Логотип в загловке */
 const Logo = () => {
   return (
     <E.LogoWrapper>
-      <Typography variant="h5">OverGames</Typography>
+      <Link variant="h5" color="textPrimary" style={{ textDecoration: "none" }} href="/">
+        OverGames
+      </Link>
     </E.LogoWrapper>
   );
 };

@@ -1,6 +1,5 @@
 import { IGameDescription } from 'models/game-description';
 import React, { useEffect, useState } from 'react';
-import { RouteComponentProps } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { loadGameDescription } from 'services';
 import BackButton from './back-button';
@@ -13,7 +12,7 @@ interface IParams {
   game_name: string;
 }
 
-const GameDescription: React.FC<RouteComponentProps> = ({ location, match }) => {
+const GameDescription: React.FC = () => {
 
   const { game_name } = useParams<IParams>(); //Берем параметр из адресной строки
   const [gameDescription, setGameDescription] = useState<IGameDescription>();

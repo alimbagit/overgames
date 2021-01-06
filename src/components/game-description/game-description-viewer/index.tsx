@@ -51,14 +51,6 @@ const GameDescriptionViewer = ({
           )}
           {/* Значки для платформ */}
           {PlatformChipsCreator(parent_platforms)}
-          {/* Значок для ссылки на веб-сайт */}
-          <Grid item>
-            <Chip
-              icon={<AddShoppingCartIcon />}
-              variant="outlined"
-              label={<Link href={website}>go to website</Link>}
-            />
-          </Grid>
         </Grid>
       </Grid>
       <Grid item xs={12}>
@@ -66,6 +58,12 @@ const GameDescriptionViewer = ({
       </Grid>
       <Grid item xs={12}>
         <Typography>{description}</Typography>
+      </Grid>
+      {/* Значок для ссылки на веб-сайт */}
+      <Grid item xs={12}>
+        <Link href={website} variant="body1">
+          Go to website {website}
+        </Link>
       </Grid>
       {clip && (
         <Grid item xs={12}>
