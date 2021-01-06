@@ -28,3 +28,4 @@ build
 firebase.json
 .firebaserc
 .firebase
+.eslintcache
